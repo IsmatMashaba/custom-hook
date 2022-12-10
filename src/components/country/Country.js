@@ -1,14 +1,26 @@
 import React from "react";
 import useFetch from "../../customHook/useFetch";
 
+const url = "https://restcountries.com/v3.1/name/peru";
 
-const url = "https://restcountries.com/v3.1/all";
 export default function Products() {
-  const product= useFetch(url).data;
+  const result= useFetch(url);
+  const countryData=result.data;
+  const status=result.isLoading;
 
-  /*console.log(product);*/
+  /*console.log(countryData);*/
+  if (status){
+      return <div>Loading...</div>
+  }
   return (
       <div>
         <div><strong>Country</strong></div>
+          <div>
+              {countryData.map((item)=>{
+                  return<div>{item.name.common}</div>
+              })}
+
+          </div>
       </div>)
 }
+

@@ -1,25 +1,23 @@
-import React from "react";
 
-import {useEffect, useState} from "react";
+import React from "react";
 import useFetch from "../../customHook/useFetch";
 
-const url='https://fakestoreapi.com/products'
 
-export default function Product() {
-const product= useFetch(url).data;
+const url = "https://fakestoreapi.com/products/1";
+export default function Products() {
 
-/*console.log(product);*/
-return (
-      <div>
-        <div><strong>Product</strong></div>
-        {/*<div>
-          {product.map((item)=>{
-             return (<div>{item.title}</div>
-              )})}
-            <h1>{product.title}</h1>
-            <img src={product.image} alt={product.title}/>
-            <p>{product.description}</p>
-        </div>*/}
-      </div>
-  )}
+    const result=useFetch(url)
+    const product= result.data;
+    const status=result.isLoading;
+
+   /* console.log(product);*/
+    if (status){
+        return <div>Loading..</div>
+    }
+    return (
+        <div>
+            <div><strong>Product</strong></div>
+            <div>{product.title}</div>
+        </div>)
+}
 
